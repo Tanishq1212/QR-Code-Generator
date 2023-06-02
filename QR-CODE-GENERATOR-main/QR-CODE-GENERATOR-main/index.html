@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- <script src="qr.js"></script> -->
+    <title>QR Code Generator</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>QR CODE GENERATOR</h1>
+        <p>Enter a url or text to generate QR-code</p>
+      </div>
+      <div class="input-from">
+        <input type="text" class="qr-input" placeholder="enter url or text" />
+        <button class="generate-btn">Generate QR Code</button>
+      </div>
+      <div class="qr-code">
+        <img src="qrcode.png" alt="" class="qr-image" />
+      </div>
+    </div>
+    <script>
+      var container = document.querySelector(".container");
+      var generatebtn = document.querySelector(".generate-btn");
+      var qrinput = document.querySelector(".qr-input");
+      var qrimg = document.querySelector(".qr-image");
+
+      generatebtn.onclick = function () {
+        if (qrinput.value.length > 0) {
+          generatebtn.innerText = "Generating QR Code...";
+
+          qrimg.src =
+            "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" +
+            qrinput.value;
+          qrimg.onload = function () {
+            container.classList.add("active");
+            generatebtn.innerText = "Generate QR code";
+          };
+        }
+      };
+    </script>
+  </body>
+</html>
